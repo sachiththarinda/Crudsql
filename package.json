@@ -1,0 +1,27 @@
+{
+  "name": "merncrud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachiththarinda/mernCrud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachiththarinda/mernCrud/issues"
+  },
+  "homepage": "https://github.com/sachiththarinda/mernCrud#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  }
+}
