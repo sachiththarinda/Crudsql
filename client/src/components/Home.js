@@ -28,16 +28,44 @@ export default class Home extends Component {
       
       render() {
         return (
-          <div>
-            {this.state.posts.map(posts =>(
-              <div>
-                <p>{posts.topic}</p>
-                <p>{posts.description}</p>
-                <p>{posts.postCategory}</p>
-              </div>
+          <div className='container'>
+              <table className="table">
+            <thead>
+                <tr className='table-warning'>
+                <th scope="col">#</th>
+                <th scope="col">Topic</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {this.state.posts.map((posts, index) =>(
+                <tr>
+                    <th scope='row'>{index+1}</th>
+                    <td>
+                        <a href={`/post/${posts._id}`}>{posts.topic}</a>
+                    </td>
+                    <td>{posts.description}</td>
+                    <td>{posts.postCategory}</td>
+                    <td>
+                    <a className='btn btn-warning' href={`/edit/${posts._id}`}>
+                        <i className="fas fa-pen"></i>&nbsp;&nbsp; Edit
+                    </a>&nbsp;&nbsp;
+                    <a className='btn btn-danger' href='#'>
+                        <i className="fas fa-trash"></i>&nbsp;&nbsp; Delete
+              </a>
+                    </td>
+                </tr>
+              
               
             ))}
-            
+            </tbody>
+            </table>
+            <button className='btn btn-success'>
+                <a href="/add" style={{textDecoration:'none',color:'white' }}>
+                <i className="fas fa-plus"></i>&nbsp;&nbsp; Create New</a>
+            </button>
           </div>
         )
       }

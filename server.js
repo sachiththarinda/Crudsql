@@ -65,12 +65,12 @@ app.get('/post/:id',(req,res)=>{
       var postCategory=req.body.postCategory;
      
 
-      con.query("INSERT INTO posts.posts (topic, description, postCategory) VALUES (?,?,?)", [topic, description, postCategory],
+      con.query("INSERT INTO  posts.posts (topic, description, postCategory) VALUES (?,?,?)", [topic, description, postCategory],
       (err, result)=>{
         if(err){
             res.status(400).json({error:err})
         }
-        return res.status(200).json({success:'Post saved sucessfully!!'})
+        return res.status(200).json({success:'Post saved sucessfully!!',result})
       } )
 
   })
