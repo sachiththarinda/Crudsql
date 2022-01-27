@@ -47,13 +47,16 @@ var con = mysql.createConnection({
 
 //get specific post
 app.get('/post/:id',(req,res)=>{
-    let postId = req.params.id;
+    const postId = req.params.id;
+    console.log(postId);
 
     con.query("SELECT * FROM posts.posts WHERE postId=?",[postId],(err, post)=>{
         if(err){
-            return res.status(400).json({sucess:false, err})
+            return res.status(400).json({success:false, err})
         }
-        return res.status(200).json({sucess:true, post})
+        return res.status(200).json({success:true, post})
+        //res.json(post);
+        //console.log(post);
     })
 })
 

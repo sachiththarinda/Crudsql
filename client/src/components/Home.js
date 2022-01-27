@@ -28,10 +28,10 @@ export default class Home extends Component {
       
       render() {
         return (
-          <div className='container'>
+          <div className='container' >
               <table className="table">
             <thead>
-                <tr className='table-warning'>
+                <tr className='table-dark'>
                 <th scope="col">#</th>
                 <th scope="col">Topic</th>
                 <th scope="col">Description</th>
@@ -44,7 +44,7 @@ export default class Home extends Component {
                 <tr>
                     <th scope='row'>{index+1}</th>
                     <td>
-                        <a href={`/post/${posts._id}`}>{posts.topic}</a>
+                        <a href={`/post/${posts.postId}`}>{posts.topic}</a>
                     </td>
                     <td>{posts.description}</td>
                     <td>{posts.postCategory}</td>
