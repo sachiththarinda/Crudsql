@@ -25,10 +25,50 @@ export default class Home extends Component {
         })
       }
       
-      
+      onDelete = (id) => {
+        if(window.confirm("Do you really want to delete this record ??") == true){
+        axios.delete(`http://localhost:8080/post/delete/${id}`)
+        .then((res)=>{
+          alert('post deleted sucessfully')
+            this.retriewPost();
+          
+        })
+        }else{
+          this.retriewPost();     
+        }
+        
+      }
+
+      filterData(posts, searchKey ){
+        const result = posts.filter((post)=>
+        //get data searching topic or description or category
+        post.topic.toLowerCase().includes(searchKey) || post.description.toLowerCase().includes(searchKey) ||
+        post.postCategory.toLowerCase().includes(searchKey)  
+        )
+        this.setState({posts:result})
+      }
+    
+      handleSearchArea =(e)=>{
+        const searchKey = e.currentTarget.value;
+         
+        //console.log( e.currentTarget.value)
+        
+        axios.get('http://localhost:8080/post')
+       .then(res=>{
+         if(res.data.success){
+    
+           this.filterData(res.data.existingPost, searchKey)
+         }
+       })
+      }
+
       render() {
         return (
           <div className='container' >
+            <div className='col-lg-3 mt-2 mb-2' style={{float: 'right'}}> 
+        <input className='form-control' type="search" placeholder='Serach' name='searchQuery'
+        onChange={this.handleSearchArea}/>
+     </div>
               <table className="table">
             <thead>
                 <tr className='table-dark'>
@@ -41,18 +81,18 @@ export default class Home extends Component {
             </thead>
             <tbody>
             {this.state.posts.map((posts, index) =>(
-                <tr>
+                <tr >
                     <th scope='row'>{index+1}</th>
                     <td>
                         <a href={`/post/${posts.postId}`}>{posts.topic}</a>
                     </td>
-                    <td>{posts.description}</td>
+                    <td style={{width:'450px'}}>{posts.description}</td>
                     <td>{posts.postCategory}</td>
                     <td>
-                    <a className='btn btn-warning' href={`/edit/${posts._id}`}>
+                    <a className='btn btn-warning' href={`/edit/${posts.postId}`}>
                         <i className="fas fa-pen"></i>&nbsp;&nbsp; Edit
                     </a>&nbsp;&nbsp;
-                    <a className='btn btn-danger' href='#'>
+                    <a className='btn btn-danger' href='#'  onClick={()=> this.onDelete(posts.postId)}>
                         <i className="fas fa-trash"></i>&nbsp;&nbsp; Delete
               </a>
                     </td>
